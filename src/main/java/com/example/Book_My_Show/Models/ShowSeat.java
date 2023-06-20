@@ -23,11 +23,11 @@ public class ShowSeat {
 
     private boolean isFoodAttached ;
 
-    @ManyToOne
-    @JoinColumn
-    private Ticket ticket ;
-
-    @OneToMany
-    @JoinColumn
-    private Show show ;
+//    @ManyToOne
+//    @JoinColumn
+//    private Ticket ticket ;
+//
+//    @OneToMany
+//    @JoinColumn
+//    private Show show ;
 }

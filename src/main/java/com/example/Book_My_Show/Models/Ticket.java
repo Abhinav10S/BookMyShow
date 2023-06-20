@@ -28,12 +28,12 @@ public class Ticket {
 
     private String theaterName ;
 
-    @OneToMany
-    @JoinColumn
-    private ShowSeat showSeat ;
-
-    @ManyToOne
-    @JoinColumn
-    private User user ;
+//    @OneToMany
+//    @JoinColumn
+//    private ShowSeat showSeat ;
+//
+//    @ManyToOne
+//    @JoinColumn
+//    private User user ;
 
 }

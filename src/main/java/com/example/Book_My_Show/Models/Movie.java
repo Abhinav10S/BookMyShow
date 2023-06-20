@@ -31,8 +31,8 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Language language ;
 
-    @OneToMany
-    @JoinColumn
-    private Show show ;
+//    @OneToMany
+//    @JoinColumn
+//    private Show show ;
 
 }

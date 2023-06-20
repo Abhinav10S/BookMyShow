@@ -15,7 +15,7 @@ public class TheaterSeats {
     private int SeatNo ;
     private SeatType seatType ;
 
-    @ManyToOne
-    @JoinColumn
-    private Theater theater ;
+//    @ManyToOne
+//    @JoinColumn
+//    private Theater theater ;
 }

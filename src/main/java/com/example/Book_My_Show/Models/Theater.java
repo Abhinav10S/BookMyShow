@@ -15,12 +15,12 @@ public class Theater {
 
     private String location ;
 
-     @OneToMany
-     @JoinColumn
-     private TheaterSeats theaterSeats ;
-
-     @OneToMany
-     @JoinColumn
-     private Show show ;
+//     @OneToMany
+//     @JoinColumn
+//     private TheaterSeats theaterSeats ;
+//
+//     @OneToMany
+//     @JoinColumn
+//     private Show show ;
 
 }
