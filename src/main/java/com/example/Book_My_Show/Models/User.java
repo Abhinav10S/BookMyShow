@@ -1,11 +1,17 @@
 package com.example.Book_My_Show.Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="users")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class User {
 
     @Id
