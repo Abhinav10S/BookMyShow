@@ -41,4 +41,9 @@ public class UserService {
 
         return userResponseDto;
     }
+
+    public List<User> getAllUsersGreaterThan(Integer age) {
+        List<User> users = userRepository.findUserWithAgeGreater(age);
+        return  users ;
+    }
 }

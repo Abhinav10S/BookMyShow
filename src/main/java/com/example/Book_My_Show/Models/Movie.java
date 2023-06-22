@@ -3,13 +3,19 @@ package com.example.Book_My_Show.Models;
 import com.example.Book_My_Show.Enums.Genre;
 import com.example.Book_My_Show.Enums.Language;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="movies")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movie {
 
     @Id
@@ -21,6 +27,8 @@ public class Movie {
 
     private double duration ;
 
+
+    @Column(scale = 2)
     private double rating ;
 
     private Date releaseDate ;
@@ -31,8 +39,6 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Language language ;
 
-//    @OneToMany
-//    @JoinColumn
-//    private Show show ;
-
+    @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
+    private List<Show> showList = new ArrayList<>();
 }

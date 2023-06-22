@@ -7,6 +7,8 @@ import com.example.Book_My_Show.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -34,5 +36,10 @@ public class UserController {
             responseDto.setStatusMessage("Failure");
             return responseDto;
         }
+    }
+
+    @GetMapping("/findUserGreaterThanAAge")
+    public List<User> getAllUsers (@RequestParam ("age") Integer age){
+        return userService.getAllUsersGreaterThan(age);
     }
 }
