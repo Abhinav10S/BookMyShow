@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "theaterSeat")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class TheaterSeats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

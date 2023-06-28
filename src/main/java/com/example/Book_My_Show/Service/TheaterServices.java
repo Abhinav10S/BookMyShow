@@ -18,17 +18,13 @@ public class TheaterServices {
     TheaterRepository theaterRepository ;
     public String addTheater(TheaterEntryDto theaterEntryDto){
 
-        //Entity that saves into the db
-        //Convert the entryDto --> Entity and then save it
         Theater theater = TheaterTransformers.convertDtoToEntity(theaterEntryDto);
         theaterRepository.save(theater);
 
-        return "Theater Added succesfully";
+        return "Theater Added successfully";
     }
 
-    public String addTheaterSeats(TheaterSeatsEntryDto theaterSeatsEntryDto){
-
-        //We need to save the TheaterSeat Entity
+    public String addTheaterSeats(TheaterSeatsEntryDto theaterSeatsEntryDto)  {
 
         int columns = theaterSeatsEntryDto.getNoOfSeatsIn1Row();
 
@@ -47,7 +43,6 @@ public class TheaterServices {
         int counter = 1;
         char ch = 'A';
 
-        //this is done for the classic seats
         for(int count = 1;count<=noOfClassicSeats;count++){
 
             String seatNo = counter+"";
@@ -63,15 +58,13 @@ public class TheaterServices {
 
             TheaterSeats theaterSeat = new TheaterSeats();
             theaterSeat.setSeatNo(seatNo);
-            theaterSeat.setTheater(theater); //storing parent info in child
+            theaterSeat.setTheater(theater);
             theaterSeat.setSeatType(SeatType.CLASSIC);
 
-            //This is the bidirectional mapping...storing the child entity
-            //in the parent entity
             theaterSeatList.add(theaterSeat);
         }
 
-        //Lets to the same for the premium seats
+
         for(int count=1;count<=noOfPremiumSeats;count++){
 
             String seatNo = counter+"";
@@ -87,15 +80,11 @@ public class TheaterServices {
             theaterSeat.setSeatType(SeatType.PREMIUM);
             theaterSeat.setSeatNo(seatNo);
 
-            //This is the bidirectional mapping...storing the child entity
-            //in the parent entity
-
             System.out.println("The seatNo is "+seatNo);
 
             theaterSeatList.add(theaterSeat);
         }
-        //We just need to save the parent : theater Entity
-        //child will automatically get saved bcz of bidirectional mapping
+
         theaterRepository.save(theater);
 
         return "Theater Seats have been successfully added";

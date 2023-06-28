@@ -24,7 +24,7 @@ public class TheaterController {
     }
 
     @PostMapping("/addTheaterSeats")
-    public String addTheaterSeats (@RequestBody TheaterSeatsEntryDto theaterSeatsEntryDto ){
+    public String addTheaterSeats (@RequestBody TheaterSeatsEntryDto theaterSeatsEntryDto ) throws  Exception{
         return theaterServices.addTheaterSeats(theaterSeatsEntryDto);
     }
 }

@@ -14,8 +14,6 @@ import java.util.Timer;
 @Entity
 @Table(name="tickets")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
