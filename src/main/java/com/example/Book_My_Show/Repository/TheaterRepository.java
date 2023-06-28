@@ -4,5 +4,5 @@ import com.example.Book_My_Show.Models.Theater;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TheaterRepository extends JpaRepository<Theater,Integer> {
-   public   Theater findByLocation(String location);
+   public Theater findByLocation(String location);
 }

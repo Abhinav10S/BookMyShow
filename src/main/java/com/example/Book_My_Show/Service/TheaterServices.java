@@ -16,69 +16,89 @@ import java.util.List;
 public class TheaterServices {
     @Autowired
     TheaterRepository theaterRepository ;
-    public String addTheater(TheaterEntryDto theaterEntryDto) {
+    public String addTheater(TheaterEntryDto theaterEntryDto){
+
+        //Entity that saves into the db
+        //Convert the entryDto --> Entity and then save it
         Theater theater = TheaterTransformers.convertDtoToEntity(theaterEntryDto);
         theaterRepository.save(theater);
-        return "Theater Added Successfully" ;
+
+        return "Theater Added succesfully";
     }
 
-    public String addTheaterSeats(TheaterSeatsEntryDto theaterSeatsEntryDto) {
-         int columns =theaterSeatsEntryDto.getNoOfSeatsIn1Row() ;
+    public String addTheaterSeats(TheaterSeatsEntryDto theaterSeatsEntryDto){
 
-         int noOfClassicSeats = theaterSeatsEntryDto.getNofOfClassicSeats();
+        //We need to save the TheaterSeat Entity
 
-         int noOfPremiumSeats = theaterSeatsEntryDto.getNoOfPremiumSeats() ;
+        int columns = theaterSeatsEntryDto.getNoOfSeatsIn1Row();
 
-         String location = theaterSeatsEntryDto.getLocation() ;
+        int noOfClassicSeats = theaterSeatsEntryDto.getNofOfClassicSeats();
+        int noOfPremiumSeats = theaterSeatsEntryDto.getNoOfPremiumSeats();
 
-         Theater theater = theaterRepository.findByLocation(location);
+        String location = theaterSeatsEntryDto.getLocation();
 
-        List<TheaterSeats> theaterSeatsList = theater.getTheaterSeatList() ;
+        Theater theater = theaterRepository.findByLocation(location);
+
+        List<TheaterSeats> theaterSeatList = theater.getTheaterSeatList();
 
         System.out.println("The value of noOfPremium Seats"+noOfPremiumSeats);
 
-        int counter = 1 ;
-        int ch = 'A' ;
 
-        for (int count = 1; count<=noOfClassicSeats ;count++){
+        int counter = 1;
+        char ch = 'A';
+
+        //this is done for the classic seats
+        for(int count = 1;count<=noOfClassicSeats;count++){
+
             String seatNo = counter+"";
-            seatNo = seatNo + ch ;
+            seatNo = seatNo + ch;
 
-            ch++ ;
-
-            if ((ch-'A') == columns){
-                ch='A' ;
-                counter++ ;
-            }
-
-            TheaterSeats theaterSeat = new TheaterSeats() ;
-            theaterSeat.setSeatNo(seatNo);
-            theaterSeat.setTheater(theater);
-            theaterSeat.setSeatType(SeatType.CLASSIC);
-
-            theaterSeatsList.add(theaterSeat);
-
-        }
-
-        for (int count = 1 ; count <=noOfPremiumSeats ; count++){
-            String seatNo = counter+"";
-            seatNo = seatNo + ch ;
-            ch++ ;
+            ch++;
 
             if((ch-'A')==columns){
-                ch='A';
-                counter++ ;
+                ch = 'A';
+                counter++;
             }
 
-            TheaterSeats theaterSeats = new TheaterSeats() ;
-            theaterSeats.setSeatNo(seatNo);
-            theaterSeats.setTheater(theater);
-            theaterSeats.setSeatType(SeatType.PREMIUM);
 
-            System.out.println("The SeatNo is "+seatNo);
-            theaterSeatsList.add(theaterSeats);
+            TheaterSeats theaterSeat = new TheaterSeats();
+            theaterSeat.setSeatNo(seatNo);
+            theaterSeat.setTheater(theater); //storing parent info in child
+            theaterSeat.setSeatType(SeatType.CLASSIC);
+
+            //This is the bidirectional mapping...storing the child entity
+            //in the parent entity
+            theaterSeatList.add(theaterSeat);
         }
+
+        //Lets to the same for the premium seats
+        for(int count=1;count<=noOfPremiumSeats;count++){
+
+            String seatNo = counter+"";
+            seatNo = seatNo + ch;
+            ch++;
+            if((ch-'A')==columns){
+                ch = 'A';
+                counter++;
+            }
+
+            TheaterSeats theaterSeat = new TheaterSeats();
+            theaterSeat.setTheater(theater);
+            theaterSeat.setSeatType(SeatType.PREMIUM);
+            theaterSeat.setSeatNo(seatNo);
+
+            //This is the bidirectional mapping...storing the child entity
+            //in the parent entity
+
+            System.out.println("The seatNo is "+seatNo);
+
+            theaterSeatList.add(theaterSeat);
+        }
+        //We just need to save the parent : theater Entity
+        //child will automatically get saved bcz of bidirectional mapping
         theaterRepository.save(theater);
-        return "Theater Sests have been successfully added";
+
+        return "Theater Seats have been successfully added";
     }
 }
+

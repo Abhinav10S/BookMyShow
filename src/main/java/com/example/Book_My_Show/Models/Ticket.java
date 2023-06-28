@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Time;
 import java.util.Date;
@@ -20,24 +21,19 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
 
-    private int totalPrice ;
+    private int totalTicketsPrice ;
 
-    private Boolean bookedSeats ;
+    private String bookedSeats ;
 
-    private Time movieTime ;
+    @CreationTimestamp
+    private Date bookedAt ;
 
-    private Date movieDate ;
+    @ManyToOne
+    @JoinColumn
+    private Show show ;
 
-    private String movieName ;
-
-    private String theaterName ;
-
-//    @OneToMany
-//    @JoinColumn
-//    private ShowSeat showSeat ;
-//
-//    @ManyToOne
-//    @JoinColumn
-//    private User user ;
+    @ManyToOne
+    @JoinColumn
+    private User user ;
 
 }

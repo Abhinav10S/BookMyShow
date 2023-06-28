@@ -3,15 +3,19 @@ package com.example.Book_My_Show.Models;
 import com.example.Book_My_Show.Enums.SeatType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "show")
+@Table(name = "shows")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Show {
@@ -31,5 +35,11 @@ public class Show {
     @ManyToOne
     @JoinColumn
     private Theater theater ;
+
+    @OneToMany(mappedBy = "show" , cascade = CascadeType.ALL)
+    private List<ShowSeat> showSeatList = new ArrayList<>() ;
+
+    @OneToMany(mappedBy = "show" , cascade = CascadeType.ALL)
+    private List<Ticket> ticketList = new ArrayList<>() ;
 
 }
